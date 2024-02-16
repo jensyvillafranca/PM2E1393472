@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PM2E1393472.Vistas.PageMap"
+             xmlns:maps="http://schemas.microsoft.com/dotnet/2021/maui/maps"
+             Title="PageMap">
+    <VerticalStackLayout>
+        <maps:Map x:Name="mapa" MapType="Street" HeightRequest="500"/>
+    </VerticalStackLayout>
+</ContentPage>

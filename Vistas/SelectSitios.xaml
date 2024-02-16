@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PM2E1393472.Vistas.SelectSitios"
+             xmlns:conver="clr-namespace:PM2E1393472.Controles"
+             Title="SelectSitios">
+    <ContentPage.Resources>
+        <conver:Base64Image x:Key="BaseArray"></conver:Base64Image>
+    </ContentPage.Resources>
+    <VerticalStackLayout>
+        <Label 
+        Text="Lista de Sitios"
+        VerticalOptions="Center" 
+        HorizontalOptions="Center" />
+
+        <ScrollView MaximumHeightRequest="500">
+            <CollectionView ItemsSource="{Binding Items}" SelectionMode="Single">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="90"/>
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Column="0" HorizontalOptions="Start" Margin="4" x:Name="foto" HeightRequest="60" WidthRequest="60" Aspect="Fill" Source="{Binding Imagen, Converter={StaticResource BaseArray}}"></Image>
+                                <Label Grid.Column="1" Text="{Binding descripcion}" VerticalOptions="Center" HorizontalOptions="Start" HorizontalTextAlignment="Start"></Label>
+                            </Grid>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnTapped"/>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Button Grid.Column="0" Grid.Row="0" Margin="10,20,0,0" x:Name="btnEliminar"  Text="Eliminar Casa" VerticalOptions="Start" HorizontalOptions="Start" Clicked="btnEliminar_Clicked" WidthRequest="130" BackgroundColor="DarkGrey"/>
+            <Button Grid.Column="1" Grid.Row="0" Margin="10,20,0,0" x:Name="btnVerMapa"  Text="Ver Mapa" VerticalOptions="Start" HorizontalOptions="Start" Clicked="btnVerMapa_Clicked" WidthRequest="130" BackgroundColor="DarkGrey"/>
+            <Button Grid.Column="0" Grid.Row="1" Margin="10,20,0,0" x:Name="btnActualizar"  Text="Actualizar" VerticalOptions="Start" HorizontalOptions="Start" Clicked="btnActualizar_Clicked" WidthRequest="130" BackgroundColor="DarkGrey" />
+
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>

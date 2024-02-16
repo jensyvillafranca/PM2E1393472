@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PM2E1393472.Vistas.PaginaInicial"
+             Title="PaginaInicial">
+    <StackLayout>
+        <Grid>
+            <!--Definiendo la cantidad de filas que vamos a necesitar en la interfaz-->
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Image Grid.Row="0" Grid.Column="0" Source="logo.png" WidthRequest="80"/>
+            <Label Grid.Row="0" Grid.Column="1" TextColor="Black" Text="SITE VISITOR APP" FontAttributes="Bold" FontSize="20" HorizontalOptions="Start" VerticalOptions="Center" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"/>
+        </Grid>
+        <!--Control de Image-->
+        <Label TextColor="Black" Text="Imagen Sitio Visitado"  FontAttributes="Bold" FontSize="17" HorizontalOptions="Center" Margin="0,20,0,0"/>
+        <Image x:Name="foto" BackgroundColor="AliceBlue" HeightRequest="150" WidthRequest="150" HorizontalOptions="Center" VerticalOptions="Start" Margin="10"></Image>
+        <Button Text="Tomar una imagen" x:Name="btnFoto" Clicked="btnFoto_Clicked" VerticalOptions="Center" HorizontalOptions="Center" Margin="3,3,3,3"></Button>
+
+        <!--Latitud-->
+        <Label TextColor="Black" Text="Latitud" FontAttributes="Bold" FontSize="15" HorizontalOptions="Center"/>
+        <Entry x:Name="txtLatitud" HorizontalOptions="Center" IsEnabled="False"/>
+
+        <!--Longitud-->
+        <Label TextColor="Black" Text="Longitud" FontAttributes="Bold" FontSize="15" HorizontalOptions="Center"/>
+        <Entry x:Name="txtLongitud" HorizontalOptions="Center" IsEnabled="False"/>
+
+        <!--Descripción-->
+        <Label TextColor="Black" Text="Descripción:" FontAttributes="Bold" FontSize="15" HorizontalOptions="Center"/>
+        <Entry x:Name="txtDescripcion" Placeholder="Ejemplo: Choloma Cortés" Keyboard="Text" HorizontalOptions="Center"/>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <!--Botones-->
+            <Button x:Name="btnAgregar" Grid.Column="0" Text="Agregar" VerticalOptions="Center" HorizontalOptions="Center" Clicked="btnAgregar_Clicked"/>
+            <Button x:Name="btnLista" Grid.Column="1" Text="ListaSitios" VerticalOptions="Center" HorizontalOptions="Center" Clicked="btnLista_Clicked"/>
+        </Grid>
+        <Button x:Name="btnSalir"  Text="Salir" VerticalOptions="Center" HorizontalOptions="Center" Clicked="btnSalir_Clicked" />
+
+
+    </StackLayout>
+</ContentPage>

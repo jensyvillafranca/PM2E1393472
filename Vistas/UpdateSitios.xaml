@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PM2E1393472.Vistas.UpdateSitios"
+             Title="UpdateSitios">
+    <StackLayout>
+        <Grid>
+            <!--Definiendo la cantidad de filas que vamos a necesitar en la interfaz-->
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Image Grid.Row="0" Grid.Column="0" Source="logo.png" WidthRequest="80"/>
+            <Label Grid.Row="0" Grid.Column="1" TextColor="Black" Text="SITE VISITOR APP" FontAttributes="Bold" FontSize="20" HorizontalOptions="Start" VerticalOptions="Center" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"/>
+        </Grid>
+        <!--Oculto-->
+        <Entry x:Name="txtUpOculto" Text="{Binding id}" IsVisible="false"/>
+
+        <!--Latitud-->
+        <Label TextColor="Black" Text="Latitud" FontAttributes="Bold" FontSize="15" HorizontalOptions="Center"/>
+        <Entry x:Name="txtLatitud" HorizontalOptions="Center" IsEnabled="False"/>
+
+        <!--Longitud-->
+        <Label TextColor="Black" Text="Longitud" FontAttributes="Bold" FontSize="15" HorizontalOptions="Center"/>
+        <Entry x:Name="txtLongitud" HorizontalOptions="Center" IsEnabled="False"/>
+
+        <!--Descripción-->
+        <Label TextColor="Black" Text="Descripción:" FontAttributes="Bold" FontSize="15" HorizontalOptions="Center"/>
+        <Entry x:Name="txtDescripcion" HorizontalOptions="Center" Text="{Binding descripcion}"/>
+
+        <Button x:Name="btnActualizar" Text="Actualizar Sitio" VerticalOptions="Center" HorizontalOptions="Center" Clicked="btnActualizar_Clicked"/>
+    </StackLayout>
+</ContentPage>
