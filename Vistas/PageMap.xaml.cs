@@ -3,6 +3,7 @@ using Microsoft.Maui.Controls.Maps;
 using Microsoft.Maui.Graphics;
 using Microsoft.Maui.Devices;
 using Microsoft.Maui.Maps;
+using GeolocatorPlugin;
 namespace PM2E1393472.Vistas;
 
 public partial class PageMap : ContentPage
@@ -19,17 +20,17 @@ public partial class PageMap : ContentPage
         sitios = itemSeleccionado;
 
     }
-    protected override async void OnAppearing()
+
+    protected async override void OnAppearing()
     {
         base.OnAppearing();
 
         var connection = Connectivity.NetworkAccess;
-        var local = Geolocation.GetLocationAsync();
+        var local = CrossGeolocator.Current;
 
         if (connection == NetworkAccess.Internet)
         {
-            var location = await local;
-            if (location != null)
+            if (local != null && local.IsGeolocationAvailable && local.IsGeolocationEnabled)
             {
                 var pinEstatico = new Pin
                 {
@@ -44,7 +45,7 @@ public partial class PageMap : ContentPage
             }
             else
             {
-                if (!local.IsCompletedSuccessfully)
+                if (!local.IsGeolocationEnabled)
                 {
                     await DisplayAlert("GPS desactivado", "Por favor, activa el GPS para continuar.", "OK");
                 }
@@ -52,7 +53,7 @@ public partial class PageMap : ContentPage
         }
         else
         {
-            await DisplayAlert("Sin Acceso a internet", "Por favor, revisa tu conexión a internet para continuar.", "OK");
+            await DisplayAlert("Sin Acceso a internet", "Por favor, revisa tu conexion a internet para continuar.", "OK");
         }
     }
 

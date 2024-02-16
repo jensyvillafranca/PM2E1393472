@@ -1,4 +1,5 @@
-using static CoreFoundation.DispatchSource;
+using PM2E1393472.Controles;
+using PM2E1393472.ModeloSQL;
 
 namespace PM2E1393472.Vistas;
 
@@ -6,9 +7,12 @@ public partial class UpdateSitios : ContentPage
 {
     private Controles.SitiosControl sitiosBD;
     FileResult photo; //Objeto Global
+    Sitios new_sitios = new Sitios();
+
     public UpdateSitios()
-	{
+    {
         InitializeComponent();
+
         sitiosBD = new Controles.SitiosControl();
         //Permisos de Geolocalizacion
         var connection = Connectivity.Current.NetworkAccess;
@@ -58,14 +62,19 @@ public partial class UpdateSitios : ContentPage
         {
             DisplayAlert("Sin Acceso a Internet", "Por favor, revisa tu conexión a Internet para continuar.", "OK");
         }
-
+        Console.WriteLine(this.BindingContext);
     }
 
     public UpdateSitios(Controles.SitiosControl rutaBD)
     {
         InitializeComponent();
         sitiosBD = rutaBD;
+    }
 
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        new_sitios = (Sitios)this.BindingContext;
     }
 
     public async Task GetLocationAsync()
@@ -182,6 +191,9 @@ public partial class UpdateSitios : ContentPage
                 return Base64;
             }
         }
-        return null;
+        else
+        {
+            return new_sitios.Imagen.ToString();
+        }
     }
 }

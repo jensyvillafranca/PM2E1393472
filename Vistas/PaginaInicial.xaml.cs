@@ -145,6 +145,7 @@ public partial class PaginaInicial : ContentPage
 
     private void btnSalir_Clicked(object sender, EventArgs e)
     {
+        Environment.Exit(0);    
     }
 
     private async void btnFoto_Clicked(object sender, EventArgs e)

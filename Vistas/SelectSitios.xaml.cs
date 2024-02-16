@@ -63,8 +63,13 @@ public partial class SelectSitios : ContentPage
     {
         if (validate_item()) return;
 
-        var mapa = new Vistas.PageMap(itemSeleccionado);
-        await Navigation.PushAsync(mapa);
+        bool answer = await DisplayAlert("Confirmación de mapa", "¿Estás seguro de que quieres ir a ver el mapa?", "Sí", "No");
+        if (answer == true)
+        {
+            //Mandar a llamar el metodo de eliminar de PersonasControles
+            var mapa = new Vistas.PageMap(itemSeleccionado);
+            await Navigation.PushAsync(mapa);
+        }
     }
 
     private async void btnActualizar_Clicked(object sender, EventArgs e)
