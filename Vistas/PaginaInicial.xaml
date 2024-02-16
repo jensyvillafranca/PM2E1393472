@@ -17,12 +17,12 @@
             </Grid.ColumnDefinitions>
 
             <Image Grid.Row="0" Grid.Column="0" Source="logo.png" WidthRequest="80"/>
-            <Label Grid.Row="0" Grid.Column="1" TextColor="Black" Text="SITE VISITOR APP" FontAttributes="Bold" FontSize="20" HorizontalOptions="Start" VerticalOptions="Center" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"/>
+            <Label Grid.Row="0" Grid.Column="1" TextColor="Black" Margin="-35,0,0,0" Text="SITE VISITOR APP" FontAttributes="Bold" FontSize="20" HorizontalOptions="Start" VerticalOptions="Center" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"/>
         </Grid>
         <!--Control de Image-->
         <Label TextColor="Black" Text="Imagen Sitio Visitado"  FontAttributes="Bold" FontSize="17" HorizontalOptions="Center" Margin="0,20,0,0"/>
         <Image x:Name="foto" BackgroundColor="AliceBlue" HeightRequest="150" WidthRequest="150" HorizontalOptions="Center" VerticalOptions="Start" Margin="10"></Image>
-        <Button Text="Tomar una imagen" x:Name="btnFoto" Clicked="btnFoto_Clicked" VerticalOptions="Center" HorizontalOptions="Center" Margin="3,3,3,3"></Button>
+        <Button Text="Tomar una imagen" x:Name="btnFoto" Clicked="btnFoto_Clicked" VerticalOptions="Center" HorizontalOptions="Center" Margin="3,3,3,3" BackgroundColor="CadetBlue"></Button>
 
         <!--Latitud-->
         <Label TextColor="Black" Text="Latitud" FontAttributes="Bold" FontSize="15" HorizontalOptions="Center"/>
@@ -48,10 +48,10 @@
             </Grid.ColumnDefinitions>
 
             <!--Botones-->
-            <Button x:Name="btnAgregar" Grid.Column="0" Text="Agregar" VerticalOptions="Center" HorizontalOptions="Center" Clicked="btnAgregar_Clicked"/>
-            <Button x:Name="btnLista" Grid.Column="1" Text="ListaSitios" VerticalOptions="Center" HorizontalOptions="Center" Clicked="btnLista_Clicked"/>
+            <Button x:Name="btnAgregar" Margin="85,10,0,0" WidthRequest="110" Grid.Column="0" Text="Agregar" VerticalOptions="Center" HorizontalOptions="Center" Clicked="btnAgregar_Clicked" BackgroundColor="CadetBlue"/>
+            <Button x:Name="btnLista" Grid.Column="1" Text="Lista Sitios" VerticalOptions="Center" HorizontalOptions="Center" Clicked="btnLista_Clicked" Margin="-30,10,0,0" BackgroundColor="CadetBlue"/>
         </Grid>
-        <Button x:Name="btnSalir"  Text="Salir" VerticalOptions="Center" HorizontalOptions="Center" Clicked="btnSalir_Clicked" />
+        <Button x:Name="btnSalir"  Margin="78,10,0,0" WidthRequest="110" Text="Salir" VerticalOptions="Start" HorizontalOptions="Start" Clicked="btnSalir_Clicked" BackgroundColor="CadetBlue" />
 
 
     </StackLayout>

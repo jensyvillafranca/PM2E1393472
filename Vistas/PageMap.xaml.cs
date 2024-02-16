@@ -56,11 +56,6 @@ public partial class PageMap : ContentPage
         }
     }
 
-    private async void LoadImage(object sender, EventArgs e)
-    {
-      //  await ShareImage(sitios.Imagen, "ubicacion.jpg");
-    }
-
     private async Task ShareImage(byte[] imageData, string filename)
     {
         var file = Path.Combine(FileSystem.CacheDirectory, filename);
@@ -73,4 +68,9 @@ public partial class PageMap : ContentPage
         });
     }
 
+    private async void LoadImage_Clicked(object sender, EventArgs e)
+    {
+        byte[] array_image = Convert.FromBase64String(sitios.Imagen);
+        await ShareImage(array_image, "ubicacion.jpg");
+    }
 }

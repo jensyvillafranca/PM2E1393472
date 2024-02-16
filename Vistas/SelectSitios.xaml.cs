@@ -6,10 +6,10 @@ public partial class SelectSitios : ContentPage
 {
     private Controles.SitiosControl rutaTarea;
     public ObservableCollection<ModeloSQL.Sitios> Items { get; set; }
-    ModeloSQL.Sitios itemSeleccionado;
+    ModeloSQL.Sitios itemSeleccionado = null;
     public SelectSitios(IEnumerable<ModeloSQL.Sitios> ItemPersonas)
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
         BindingContext = new ModeloSQL.ModeloSelect(ItemPersonas);
         rutaTarea = new Controles.SitiosControl();
         Items = new ObservableCollection<ModeloSQL.Sitios>();
@@ -22,6 +22,11 @@ public partial class SelectSitios : ContentPage
     {
         base.OnAppearing();
 
+        load_new_data();
+    }
+
+    private async void load_new_data()
+    {
         var listaSitios = await rutaTarea.GetListSitios(); //Lista actual de datos 
         Items.Clear(); //Limpia la lista
 
@@ -31,6 +36,7 @@ public partial class SelectSitios : ContentPage
         {
             Items.Add(persona); //se agrega esos registros actualizados de nuevo a la lista.
         }
+        this.BindingContext = this;
     }
 
     private async void btnAtras_Clicked(object sender, EventArgs e)
@@ -41,35 +47,49 @@ public partial class SelectSitios : ContentPage
 
     private async void btnEliminar_Clicked(object sender, EventArgs e)
     {
+        if (validate_item()) return;
+
         bool answer = await DisplayAlert("Confirmación de Eliminación", "¿Estás seguro de que quieres eliminar este registro?", "Sí", "No");
         if (answer == true)
         {
             //Mandar a llamar el metodo de eliminar de PersonasControles
             await rutaTarea.DeleteSitio(itemSeleccionado);
-            OnAppearing();
+            itemSeleccionado = null;
+            load_new_data();
         }
-
     }
 
     private async void btnVerMapa_Clicked(object sender, EventArgs e)
     {
+        if (validate_item()) return;
+
         var mapa = new Vistas.PageMap(itemSeleccionado);
         await Navigation.PushAsync(mapa);
     }
 
     private async void btnActualizar_Clicked(object sender, EventArgs e)
     {
+        if (validate_item()) return;
+
         var actualizarPantalla = new Vistas.UpdateSitios();
         actualizarPantalla.BindingContext = itemSeleccionado;
         await Navigation.PushAsync(actualizarPantalla);
-
     }
 
+    private bool validate_item()
+    {
+        if (itemSeleccionado == null)
+        {
+            DisplayAlert("Advertencia", "Selecciona una direccion de la lista", "OK");
+            return true;
+        }
 
-    private async void OnTapped(object sender, EventArgs e)
+        return false;
+    }
+
+    private async void OnTapped(object sender, SelectionChangedEventArgs e)
     {
         //Obtener el item que se ha seleccionado o tocado
-        var elemento = (StackLayout)sender;
-        itemSeleccionado = (ModeloSQL.Sitios)elemento.BindingContext;
+        itemSeleccionado = e.CurrentSelection.FirstOrDefault() as ModeloSQL.Sitios;
     }
 }

@@ -6,5 +6,6 @@
              Title="PageMap">
     <VerticalStackLayout>
         <maps:Map x:Name="mapa" MapType="Street" HeightRequest="500"/>
+        <Button Text="Compartir imagen" x:Name="LoadImage" Clicked="LoadImage_Clicked"></Button>
     </VerticalStackLayout>
 </ContentPage>

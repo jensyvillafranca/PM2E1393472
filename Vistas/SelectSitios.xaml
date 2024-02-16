@@ -14,7 +14,7 @@
         HorizontalOptions="Center" />
 
         <ScrollView MaximumHeightRequest="500">
-            <CollectionView ItemsSource="{Binding Items}" SelectionMode="Single">
+            <CollectionView ItemsSource="{Binding Items}" SelectionMode="Single" SelectionChanged="OnTapped">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout>
@@ -26,9 +26,6 @@
                                 <Image Grid.Column="0" HorizontalOptions="Start" Margin="4" x:Name="foto" HeightRequest="60" WidthRequest="60" Aspect="Fill" Source="{Binding Imagen, Converter={StaticResource BaseArray}}"></Image>
                                 <Label Grid.Column="1" Text="{Binding descripcion}" VerticalOptions="Center" HorizontalOptions="Start" HorizontalTextAlignment="Start"></Label>
                             </Grid>
-                            <StackLayout.GestureRecognizers>
-                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnTapped"/>
-                            </StackLayout.GestureRecognizers>
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

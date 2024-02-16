@@ -17,28 +17,6 @@ public partial class PaginaInicial : ContentPage
         InitializeComponent();
         sitiosBD = new Controles.SitiosControl();
 
-        //Permisos de Geolocalizacion
-        var connection = Connectivity.NetworkAccess;
-        var local = CrossGeolocator.Current;
-
-        if (connection == NetworkAccess.Internet)
-        {
-            CheckAndRequestPermissionAsync();
-            if (local == null || !local.IsGeolocationAvailable || !local.IsGeolocationEnabled)
-            {
-                // Si la geolocalización no está disponible o no está habilitada
-                CheckAndRequestLocationPermissionAsync();
-            }
-            else
-            {
-                GetLocationAsync();
-            }
-        }
-        else
-        {
-            DisplayAlert("Sin Acceso a internet", "Por favor, revisa tu conexion a internet para continuar.", "OK");
-        }
-
     }
 
     //Obtener la latitud y longitud de acuerdo a mi dirección gps
@@ -66,7 +44,7 @@ public partial class PaginaInicial : ContentPage
         }
         catch (Exception ex)
         {
-            await DisplayAlert("Advertencia", ex + "", "OK");
+            await DisplayAlert("Advertencia", "GPS Desactivado", "OK");
         }
     }
 
@@ -120,19 +98,18 @@ public partial class PaginaInicial : ContentPage
             longitud = txtLongitud.Text,
             descripcion = txtDescripcion.Text
         };
-       
-        if (await sitiosBD.StoreSitio(sitio) > 0) //
+
+        if (validar() == true)
         {
-            if(validar() == true)
+            if (await sitiosBD.StoreSitio(sitio) > 0) //
             {
                 await DisplayAlert("Aviso", "Sitio ingresado con exito", "OK");
             }
-            
-        }
-        else
-        {
-            await DisplayAlert("Aviso", "No se puede insertar la información", "OK");
-        }
+            else
+            {
+                await DisplayAlert("Aviso", "No se puede insertar la información", "OK");
+            }
+        }     
 
     }
     //Metodo para validar campos vacios
@@ -205,5 +182,29 @@ public partial class PaginaInicial : ContentPage
             }
         }
         return null;
+    }
+    protected async override void OnAppearing()
+    {
+        base.OnAppearing();
+
+        var connection = Connectivity.NetworkAccess;
+        var local = CrossGeolocator.Current;
+
+        if (connection == NetworkAccess.Internet)
+        {
+            if (local == null || !local.IsGeolocationAvailable || !local.IsGeolocationEnabled)
+            {
+                // Si la geolocalización no está disponible o no está habilitada
+                CheckAndRequestLocationPermissionAsync();
+            }
+            else
+            {
+                GetLocationAsync();
+            }
+        }
+        else
+        {
+            await DisplayAlert("Sin Acceso a internet", "Por favor, revisa tu conexion a internet para continuar.", "OK");
+        }
     }
 }
